@@ -1,7 +1,7 @@
 const verifyCheck = document.getElementById("verifyCheck");
 const verifyScreen = document.getElementById("verifyScreen");
-const video = document.getElementById("video");
-const audio = document.getElementById("audio");
+const imageContainer = document.getElementById("imageContainer");
+const bgSound = document.getElementById("bgSound");
 
 verifyCheck.addEventListener("change", async () => {
 
@@ -11,20 +11,17 @@ verifyCheck.addEventListener("change", async () => {
         console.log("Fullscreen blocked:", err);
     }
 
+    // Hide verification screen
     verifyScreen.style.display = "none";
 
-    video.style.display = "block";
+    // Show animated image
+    imageContainer.style.display = "flex";
 
-    try {
-        await video.play();
-    } catch (err) {
-        console.log("Video blocked:", err);
-    }
+    // Play audio
+    bgSound.volume = 1;
 
-    try {
-        await audio.play();
-    } catch (err) {
+    bgSound.play().catch(err => {
         console.log("Audio blocked:", err);
-    }
+    });
 
 });
