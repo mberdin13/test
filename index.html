@@ -1,144 +1,36 @@
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verification</title>
 
-<style>
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-}
-
-html,
-body{
-    width:100%;
-    height:100%;
-    overflow:hidden;
-    background:#000;
-    font-family:Arial, sans-serif;
-}
-
-/* Center Play Button */
-#playBtn{
-    position:absolute;
-    top:50%;
-    left:50%;
-    transform:translate(-50%, -50%);
-    width:150px;
-    height:150px;
-    border:none;
-    border-radius:50%;
-    background:rgba(255,255,255,0.15);
-    backdrop-filter:blur(10px);
-    color:#fff;
-    font-size:50px;
-    cursor:pointer;
-    z-index:9999;
-    transition:all .3s ease;
-}
-
-#playBtn:hover{
-    transform:translate(-50%, -50%) scale(1.1);
-}
-
-/* Fullscreen Container */
-#imageContainer{
-    position:fixed;
-    inset:0;
-    display:none;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-    background:#000;
-}
-
-/* Fullscreen Image */
-#animatedImage{
-    width:100vw;
-    height:100vh;
-    object-fit:cover;
-
-    animation:
-        pulse 0.05s infinite,
-        negativeFlash 0.02s infinite;
-}
-
-/* Rapid Zoom Effect */
-@keyframes pulse{
-    0%{
-        transform:scale(1);
-    }
-
-    50%{
-        transform:scale(1.25);
-    }
-
-    100%{
-        transform:scale(1);
-    }
-}
-
-/* Rapid Invert Effect */
-@keyframes negativeFlash{
-    0%,49%{
-        filter:invert(0);
-    }
-
-    50%,100%{
-        filter:invert(1);
-    }
-}
-</style>
+    <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<button id="playBtn">▶</button>
+    <div id="verifyScreen">
+        <div class="verify-box">
+            <label>
+                <input type="checkbox" id="verifyCheck">
+                <span>I am not a robot</span>
+            </label>
 
-<div id="imageContainer">
-    <img
-        id="animatedImage"
-        src="assets/imgs/img-1.png"
-        alt="Jumpscare Image"
-    >
-</div>
+            <div class="verify-footer">
+                Verification
+            </div>
+        </div>
+    </div>
 
-<audio id="bgSound" loop>
-    <source src="assets/audio/scream.mp3" type="audio/mpeg">
-</audio>
+    <video id="video" preload="auto">
+        <source src="assets/video/video.mp4" type="video/mp4">
+    </video>
 
-<script>
-const playBtn = document.getElementById("playBtn");
-const imageContainer = document.getElementById("imageContainer");
-const bgSound = document.getElementById("bgSound");
+    <audio id="audio" loop>
+        <source src="assets/audio/scream.mp3" type="audio/mpeg">
+    </audio>
 
-playBtn.addEventListener("click", async () => {
-
-    try {
-        await document.documentElement.requestFullscreen();
-    } catch (err) {
-        console.log("Fullscreen blocked:", err);
-    }
-
-    // Hide Play Button
-    playBtn.style.display = "none";
-
-    // Show Animated Image
-    imageContainer.style.display = "flex";
-
-    // Play Audio
-    bgSound.volume = 1;
-    bgSound.play().catch(err => {
-        console.log("Audio blocked:", err);
-    });
-
-});
-</script>
+    <script src="script.js"></script>
 
 </body>
 </html>
-```
